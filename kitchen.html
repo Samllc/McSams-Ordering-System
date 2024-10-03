@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Kitchen</title>
+</head>
+<body>
+    <h1>Kitchen Order View</h1>
+    <div id="orderDetails">No orders yet</div>
+    <button onclick="markAsCompleted()">Mark as Completed</button>
+
+    <script>
+        function checkForOrder() {
+            const orderData = localStorage.getItem('order');
+            if (orderData) {
+                const order = JSON.parse(orderData);
+                document.getElementById("orderDetails").innerHTML = 
+                    `Customer: ${order.customerName}, Menu Item: ${order.menuItem}, Quantity: ${order.quantity}`;
+            }
+        }
+
+        function markAsCompleted() {
+            alert('Order marked as completed!');
+            localStorage.removeItem('order');
+            checkForOrder();  // Update view after completion
+        }
+
+        setInterval(checkForOrder, 1000);  // Check for new orders every second
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Packaging</title>
+</head>
+<body>
+    <h1>Packaging Station</h1>
+    <div id="packageDetails">No orders to pack</div>
+    <button onclick="packOrder()">Pack Order</button>
+
+    <script>
+        function checkForCompletedOrder() {
+            const orderData = localStorage.getItem('order');
+            if (orderData) {
+                const order = JSON.parse(orderData);
+                document.getElementById("packageDetails").innerHTML = 
+                    `Pack this: ${order.customerName} - ${order.menuItem} x ${order.quantity}`;
+            }
+        }
+
+        function packOrder() {
+            alert('Order packed!');
+            localStorage.removeItem('order');
+            checkForCompletedOrder();  // Update view after packing
+        }
+
+        setInterval(checkForCompletedOrder, 1000);  // Check for completed orders every second
+    </script>
+</body>
+</html>
